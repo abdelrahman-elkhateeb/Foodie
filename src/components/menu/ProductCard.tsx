@@ -15,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { formatPrice } from "@/lib/format";
+import { imageAt } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import type { Product } from "@/types/ProductsTypes";
 
@@ -54,7 +55,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           >
             <div className="relative aspect-square w-full overflow-hidden bg-muted">
               <img
-                src={product.image_url}
+                src={imageAt(product.image_url, 600)}
+                srcSet={`${imageAt(product.image_url, 400)} 400w, ${imageAt(product.image_url, 800)} 800w`}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 alt={name}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -99,7 +102,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         className="mx-auto max-h-[90svh] w-full max-w-lg overflow-y-auto"
       >
         <img
-          src={product.image_url}
+          src={imageAt(product.image_url, 800)}
           alt={name}
           className="aspect-[4/3] w-full object-cover"
         />

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Eye, MoreHorizontal } from "lucide-react";
+import { Bell, Eye, MoreHorizontal } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
+import QueryError from "@/components/QueryError";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,9 +36,14 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import OrderStatusBadge from "@/components/dashboard/OrderStatusBadge";
+import {
+  canAskForNotifications,
+  enableOrderAlerts,
+} from "@/features/orders/newOrderAlert";
 import { useOrders } from "@/features/orders/useOrders";
 import { useUpdateOrderStatus } from "@/features/orders/useUpdateOrderStatus";
 import { formatDate, formatPrice } from "@/lib/format";
+import { imageAt } from "@/lib/utils";
 import { ORDER_STATUSES, type OrderStatus } from "@/types/OrderTypes";
 
 const ALL = "all";
@@ -52,6 +58,9 @@ export default function AdminOrders() {
   const [searchParams, setSearchParams] = useSearchParams();
   const statusFilter = searchParams.get("status") ?? ALL;
   const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
+  const [showAlertsButton, setShowAlertsButton] = useState(
+    canAskForNotifications
+  );
 
   // Look the order up on every render so live updates show in the sheet.
   const selectedOrder = orders.find((order) => order.id === selectedOrderId);
@@ -65,15 +74,30 @@ export default function AdminOrders() {
     return orders.filter((order) => order.status === status).length;
   }
 
-  if (error) return <p className="text-destructive">{t("common.error")}</p>;
+  if (error) return <QueryError />;
 
   return (
     <section className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">{t("admin.orders.title")}</h1>
-        <p className="text-sm text-muted-foreground">
-          {t("admin.orders.subtitle")}
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">{t("admin.orders.title")}</h1>
+          <p className="text-sm text-muted-foreground">
+            {t("admin.orders.subtitle")}
+          </p>
+        </div>
+
+        {showAlertsButton && (
+          <Button
+            variant="outline"
+            onClick={async () => {
+              await enableOrderAlerts();
+              setShowAlertsButton(false);
+            }}
+          >
+            <Bell className="h-4 w-4" />
+            {t("admin.orders.enableAlerts")}
+          </Button>
+        )}
       </div>
 
       <Tabs
@@ -252,7 +276,7 @@ export default function AdminOrders() {
                     <div key={item.id} className="flex items-center gap-3">
                       {item.products?.image_url && (
                         <img
-                          src={item.products.image_url}
+                          src={imageAt(item.products.image_url, 100)}
                           alt=""
                           className="size-10 object-cover"
                         />

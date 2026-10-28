@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProducts } from "@/features/products/useProducts";
+import { imageAt } from "@/lib/utils";
 
 export default function HomeHero() {
   const { t, i18n } = useTranslation();
@@ -69,7 +70,7 @@ export default function HomeHero() {
                 }
               >
                 <img
-                  src={product.image_url}
+                  src={imageAt(product.image_url, index === 0 ? 800 : 400)}
                   alt={isArabic ? product.name_ar : product.name_en}
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                 />

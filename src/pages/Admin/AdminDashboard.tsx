@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Activity, Banknote, Receipt, ShoppingBag } from "lucide-react";
 
+import QueryError from "@/components/QueryError";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,7 +10,7 @@ import OrderStatusBadge from "@/components/dashboard/OrderStatusBadge";
 import { statusColors } from "@/components/dashboard/orderStatusColors";
 import { useDashboardStats } from "@/features/orders/useDashboardStats";
 import { formatPrice } from "@/lib/format";
-import { cn } from "@/lib/utils";
+import { cn, imageAt } from "@/lib/utils";
 
 function StatTile({
   icon: Icon,
@@ -43,7 +44,7 @@ export default function AdminDashboard() {
   const isArabic = i18n.language === "ar";
   const { stats, isLoading, error } = useDashboardStats();
 
-  if (error) return <p className="text-destructive">{t("common.error")}</p>;
+  if (error) return <QueryError />;
 
   if (isLoading || !stats) {
     return (
@@ -181,7 +182,7 @@ export default function AdminDashboard() {
                   <div key={dish.productId} className="flex items-center gap-3">
                     {dish.image_url && (
                       <img
-                        src={dish.image_url}
+                        src={imageAt(dish.image_url, 100)}
                         alt=""
                         className="size-10 object-cover"
                       />

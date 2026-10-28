@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import MenuLoading from "@/components/MenuLoading";
+import QueryError from "@/components/QueryError";
 import ProductCard from "@/components/menu/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/features/products/useProducts";
@@ -12,7 +13,7 @@ const FEATURED_COUNT = 6;
 
 export default function FeaturedDishes() {
   const { t } = useTranslation();
-  const { data: products = [], isPending } = useProducts();
+  const { data: products = [], isPending, error } = useProducts();
 
   const featured = products
     .filter((product) => product.is_available)
@@ -54,7 +55,9 @@ export default function FeaturedDishes() {
         </div>
       )}
 
-      {isPending ? (
+      {error ? (
+        <QueryError />
+      ) : isPending ? (
         <MenuLoading />
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

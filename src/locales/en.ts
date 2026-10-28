@@ -17,6 +17,10 @@ const en = {
   common: {
     loading: "Loading...",
     error: "Something went wrong.",
+    errorHint: "Check your connection and try again.",
+    crashHint: "The page hit an unexpected problem. Reloading usually fixes it.",
+    retry: "Try again",
+    reload: "Reload",
     unavailable: "Unavailable",
     cancel: "Cancel",
     all: "All",
@@ -28,8 +32,9 @@ const en = {
   },
 
   categories: {
-    burgers: "Burgers",
-    pizza: "Pizza",
+    breakfast: "Breakfast",
+    sandwiches: "Sandwiches",
+    grills: "Grills",
     mains: "Mains",
     sides: "Sides",
     desserts: "Desserts",
@@ -179,6 +184,9 @@ const en = {
     items: "Items",
     total: "Total",
     live: "Live",
+    call: "Call the restaurant",
+    whatsapp: "WhatsApp",
+    whatsappMessage: "Hi, I'm asking about order #{{id}}",
   },
 
   orderStatus: {
@@ -339,6 +347,8 @@ const en = {
       details: "Customer and order details.",
       items: "Items",
       statusUpdated: "Order #{{id}} is now {{status}}",
+      newOrder: "New order #{{id}}",
+      enableAlerts: "Turn on alerts",
     },
   },
 };

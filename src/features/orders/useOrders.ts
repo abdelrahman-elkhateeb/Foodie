@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import supabase from "@/lib/supabase";
 import { getOrders } from "@/services/apiOrders";
+import { alertNewOrder } from "@/features/orders/newOrderAlert";
 
 export function useOrders() {
   const queryClient = useQueryClient();
@@ -23,7 +24,10 @@ export function useOrders() {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "orders" },
-        () => queryClient.invalidateQueries({ queryKey: ["orders"] })
+        (payload) => {
+          queryClient.invalidateQueries({ queryKey: ["orders"] });
+          if (payload.eventType === "INSERT") alertNewOrder(payload.new.id);
+        }
       )
       .subscribe();
 

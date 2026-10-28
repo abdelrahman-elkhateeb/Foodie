@@ -12,6 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import QueryError from "@/components/QueryError";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -47,6 +48,7 @@ import { useDeleteProduct } from "@/features/products/useDeleteProduct";
 import { useProducts } from "@/features/products/useProducts";
 import { useUser } from "@/features/users/useUser";
 import { formatPrice } from "@/lib/format";
+import { imageAt } from "@/lib/utils";
 import type { Product } from "@/types/ProductsTypes";
 
 export default function AdminProductTable() {
@@ -60,7 +62,7 @@ export default function AdminProductTable() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
 
-  if (error) return <p className="text-destructive">{t("common.error")}</p>;
+  if (error) return <QueryError />;
 
   return (
     <>
@@ -102,7 +104,7 @@ export default function AdminProductTable() {
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <img
-                          src={product.image_url}
+                          src={imageAt(product.image_url, 120)}
                           alt={name}
                           className="h-12 w-12 object-cover"
                         />

@@ -159,6 +159,8 @@ Copy `.env.example` to `.env` and fill in your Supabase project URL and anon key
 ```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Optional: shows call and WhatsApp buttons on the track order page
+VITE_RESTAURANT_PHONE=201001234567
 ```
 
 ### 3. Set up the database
@@ -169,6 +171,7 @@ Run these in the Supabase SQL editor, in order. Each one is safe to re-run.
 2. [`20261003_require_login_for_orders.sql`](supabase/migrations/20261003_require_login_for_orders.sql): only logged-in users can place orders
 3. [`20261003_archive_products.sql`](supabase/migrations/20261003_archive_products.sql): archive products that are in past orders instead of deleting them
 4. [`20261028_lock_admin.sql`](supabase/migrations/20261028_lock_admin.sql): the dashboard, product changes and order statuses are admin-only, and customers only see their own orders
+5. [`20261028_egyptian_demo_menu.sql`](supabase/migrations/20261028_egyptian_demo_menu.sql): Egyptian categories and demo menu (koshary, shawarma, grills, kunafa...)
 
 > The migrations extend existing `products`, `orders` and `order_items` tables. Create them first using the schema in [Database](#-database).
 
@@ -207,5 +210,5 @@ npm run dev
 | `order_items` | `id`, `order_id`, `product_id`, `quantity`, `price` |
 | `profiles` | `id`, `full_name`, `role` (`customer` / `admin`), `created_at` |
 
-Categories: `burgers`, `pizza`, `mains`, `sides`, `desserts`, `drinks`.
+Categories: `breakfast`, `sandwiches`, `grills`, `mains`, `sides`, `desserts`, `drinks`.
 Statuses: `pending`, `preparing`, `out_for_delivery`, `delivered`.

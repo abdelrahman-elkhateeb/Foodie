@@ -6,9 +6,12 @@ import {
   ChefHat,
   Bike,
   CheckCircle2,
+  MessageCircle,
+  Phone,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+import QueryError from "@/components/QueryError";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,6 +28,9 @@ import { useOrder } from "@/features/orders/useOrder";
 import { formatDate, formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/types/OrderTypes";
+
+// International format without "+", e.g. 201001234567. Unset hides the buttons.
+const restaurantPhone: string | undefined = import.meta.env.VITE_RESTAURANT_PHONE;
 
 const stepIcons = {
   pending: PackageCheck,
@@ -102,9 +108,7 @@ export default function TrackOrder() {
             </p>
           )}
 
-          {error && (
-            <p className="text-sm text-destructive">{t("common.error")}</p>
-          )}
+          {error && <QueryError />}
 
           {(isInvalidId || (orderId !== null && !isLoading && !order && !error)) && (
             <p className="text-sm text-muted-foreground">
@@ -139,6 +143,29 @@ export default function TrackOrder() {
                   <Badge>{t(`orderStatus.${order.status}`)}</Badge>
                 </div>
               </div>
+
+              {restaurantPhone && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Button variant="outline" asChild>
+                    <a href={`tel:+${restaurantPhone}`}>
+                      <Phone className="h-4 w-4" />
+                      {t("trackOrder.call")}
+                    </a>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <a
+                      href={`https://wa.me/${restaurantPhone}?text=${encodeURIComponent(
+                        t("trackOrder.whatsappMessage", { id: order.id })
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      {t("trackOrder.whatsapp")}
+                    </a>
+                  </Button>
+                </div>
+              )}
 
               <ol>
                 {ORDER_STATUSES.map((status, index) => {

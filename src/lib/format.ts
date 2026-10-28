@@ -1,5 +1,7 @@
+// Western digits in Arabic too ("185 ج.م.‏"), so prices match order numbers,
+// phone numbers and what Egyptian delivery apps show.
 function locale(language: string) {
-  return language === "ar" ? "ar-EG" : "en-EG";
+  return language === "ar" ? "ar-EG-u-nu-latn" : "en-EG";
 }
 
 export function formatPrice(amount: number, language: string) {

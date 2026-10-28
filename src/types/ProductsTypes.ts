@@ -1,6 +1,7 @@
 export const PRODUCT_CATEGORIES = [
-  "burgers",
-  "pizza",
+  "breakfast",
+  "sandwiches",
+  "grills",
   "mains",
   "sides",
   "desserts",

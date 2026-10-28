@@ -28,6 +28,10 @@ const ar: DeepStringRecord<typeof en> & {
   common: {
     loading: "جارٍ التحميل...",
     error: "حدث خطأ ما.",
+    errorHint: "تأكد من اتصالك بالإنترنت وحاول مرة أخرى.",
+    crashHint: "واجهت الصفحة مشكلة غير متوقعة. إعادة التحميل تحلها غالبًا.",
+    retry: "حاول مرة أخرى",
+    reload: "إعادة التحميل",
     unavailable: "غير متاح",
     cancel: "إلغاء",
     all: "الكل",
@@ -39,8 +43,9 @@ const ar: DeepStringRecord<typeof en> & {
   },
 
   categories: {
-    burgers: "برجر",
-    pizza: "بيتزا",
+    breakfast: "فطار",
+    sandwiches: "سندوتشات",
+    grills: "مشويات",
     mains: "أطباق رئيسية",
     sides: "مقبلات",
     desserts: "حلويات",
@@ -193,6 +198,9 @@ const ar: DeepStringRecord<typeof en> & {
     items: "المنتجات",
     total: "الإجمالي",
     live: "مباشر",
+    call: "اتصل بالمطعم",
+    whatsapp: "واتساب",
+    whatsappMessage: "أهلاً، بسأل عن الطلب رقم #{{id}}",
   },
 
   orderStatus: {
@@ -353,6 +361,8 @@ const ar: DeepStringRecord<typeof en> & {
       details: "بيانات العميل والطلب.",
       items: "المنتجات",
       statusUpdated: "الطلب #{{id}} أصبح: {{status}}",
+      newOrder: "طلب جديد #{{id}}",
+      enableAlerts: "تشغيل التنبيهات",
     },
   },
 };

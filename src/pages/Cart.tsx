@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { useCartItems } from "@/features/cart/useCartItems";
 import { useUser } from "@/features/users/useUser";
 import { formatPrice } from "@/lib/format";
-import { cn } from "@/lib/utils";
+import { cn, imageAt } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 
 export default function Cart() {
@@ -80,7 +80,7 @@ export default function Cart() {
               >
                 <CardContent className="flex gap-4">
                   <img
-                    src={item.image_url}
+                    src={imageAt(item.image_url, 200)}
                     alt={name}
                     className="h-24 w-24 object-cover"
                   />

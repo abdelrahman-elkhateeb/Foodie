@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
+import QueryError from "@/components/QueryError";
 import MenuLoading from "@/components/MenuLoading";
 import ProductCard from "@/components/menu/ProductCard";
 import { Input } from "@/components/ui/input";
@@ -83,7 +84,7 @@ export default function Menu() {
 
       {isPending && <MenuLoading />}
 
-      {error && <p className="text-destructive">{t("common.error")}</p>}
+      {error && <QueryError />}
 
       {!isPending && !error && filteredProducts.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">

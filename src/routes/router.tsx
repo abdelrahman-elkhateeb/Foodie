@@ -8,6 +8,7 @@ import AdminOrders from "@/pages/Admin/AdminOrders";
 import AdminProducts from "@/pages/Admin/AdminProducts";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
+import ErrorPage from "@/pages/ErrorPage";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Menu from "@/pages/Menu";
@@ -20,6 +21,7 @@ import { createBrowserRouter } from "react-router";
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
