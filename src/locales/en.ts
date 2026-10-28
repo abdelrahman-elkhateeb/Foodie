@@ -20,7 +20,6 @@ const en = {
     unavailable: "Unavailable",
     cancel: "Cancel",
     all: "All",
-    demo: "Demo",
   },
 
   payment: {
@@ -98,7 +97,7 @@ const en = {
     tagline: "A full-stack food ordering demo built with React & Supabase.",
     explore: "Explore",
     demoNote:
-      "This is a portfolio demo. Orders are not real and are visible on the public dashboard.",
+      "This is a demo. Orders are not real.",
     rights: "All rights reserved.",
   },
 
@@ -154,7 +153,7 @@ const en = {
     placing: "Placing order...",
     backToMenu: "Back to Menu",
     demoNotice:
-      "Demo app: please don't enter real personal details. Orders are visible on the public dashboard.",
+      "Demo app: please don't enter real personal details.",
   },
 
   orderConfirmed: {
@@ -237,6 +236,7 @@ const en = {
   },
 
   notFound: {
+    title: "Page not found",
     description: "The page you are looking for does not exist.",
     backHome: "Back Home",
   },
@@ -258,16 +258,7 @@ const en = {
       orders: "Orders",
     },
     backToSite: "Back to website",
-    demoBanner:
-      "Public demo: feel free to add products and move orders through their statuses. Demo menu items are protected.",
     roleAdmin: "Admin",
-    roleVisitor: "Visitor (read-only demo items)",
-    resetDemo: "Reset demo data",
-    resetTitle: "Reset demo data?",
-    resetDescription:
-      "This deletes all orders and every product created by visitors. The original demo menu is kept.",
-    resetConfirm: "Reset",
-    resetDone: "Demo data has been reset.",
 
     stats: {
       revenue: "Revenue",

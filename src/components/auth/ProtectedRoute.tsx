@@ -5,11 +5,17 @@ import { useUser } from "@/features/users/useUser";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
+  adminOnly?: boolean;
 };
 
 // Sends logged-out users to /login and brings them back here afterwards.
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, isPending } = useUser();
+// adminOnly also sends logged-in non-admins home. The database enforces the
+// same rule (see supabase/migrations), this just keeps the UI honest.
+export default function ProtectedRoute({
+  children,
+  adminOnly,
+}: ProtectedRouteProps) {
+  const { user, isAdmin, isPending } = useUser();
   const location = useLocation();
   const { t } = useTranslation();
 
@@ -30,6 +36,8 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       />
     );
   }
+
+  if (adminOnly && !isAdmin) return <Navigate to="/" replace />;
 
   return children;
 }

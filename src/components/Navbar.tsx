@@ -30,17 +30,19 @@ const links = [
   { to: "/", label: "nav.home", end: true },
   { to: "/menu", label: "nav.menu" },
   { to: "/track-order", label: "nav.trackOrder" },
-  { to: "/admin", label: "nav.dashboard", demo: true },
+  { to: "/admin", label: "nav.dashboard", adminOnly: true },
 ];
 
 export default function Navbar() {
   const totalItems = useCartStore((state) => state.getTotalItems());
-  const { user } = useUser();
+  const { user, isAdmin } = useUser();
   const { logoutUser } = useLogout();
   const { t, i18n } = useTranslation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const navLinks = links.map((link) => (
+  const navLinks = links
+    .filter((link) => !link.adminOnly || isAdmin)
+    .map((link) => (
     <NavLink
       key={link.to}
       to={link.to}
@@ -54,11 +56,6 @@ export default function Navbar() {
       }
     >
       {t(link.label)}
-      {link.demo && (
-        <span className="bg-primary px-1.5 py-0.5 text-[10px] text-primary-foreground">
-          {t("common.demo")}
-        </span>
-      )}
     </NavLink>
   ));
 

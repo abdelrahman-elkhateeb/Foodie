@@ -26,35 +26,68 @@ export const router = createBrowserRouter([
         element: <ClientLayout />,
         children: [
           { index: true, element: <Home /> },
-          { path: "menu", element: <Menu /> },
+          { path: "menu", element: <Menu />, handle: { title: "menu.title" } },
           {
             path: "checkout",
+            handle: { title: "checkout.title" },
             element: (
               <ProtectedRoute>
                 <Checkout />
               </ProtectedRoute>
             ),
           },
-          { path: "track-order", element: <TrackOrder /> },
-          { path: "cart", element: <Cart /> },
-          { path: "order-confirmed/:orderId", element: <OrderConfirmed /> },
-          { path: "*", element: <NotFound /> },
+          {
+            path: "track-order",
+            element: <TrackOrder />,
+            handle: { title: "trackOrder.title" },
+          },
+          { path: "cart", element: <Cart />, handle: { title: "cart.title" } },
+          {
+            path: "order-confirmed/:orderId",
+            element: <OrderConfirmed />,
+            handle: { title: "orderConfirmed.title" },
+          },
+          { path: "*", element: <NotFound />, handle: { title: "notFound.title" } },
         ],
       },
       {
         path: "/admin",
-        element: <AdminLayout />,
+        element: (
+          <ProtectedRoute adminOnly>
+            <AdminLayout />
+          </ProtectedRoute>
+        ),
         children: [
-          { index: true, element: <AdminDashboard /> },
-          { path: "products", element: <AdminProducts /> },
-          { path: "orders", element: <AdminOrders /> },
+          {
+            index: true,
+            element: <AdminDashboard />,
+            handle: { title: "admin.nav.dashboard" },
+          },
+          {
+            path: "products",
+            element: <AdminProducts />,
+            handle: { title: "admin.nav.products" },
+          },
+          {
+            path: "orders",
+            element: <AdminOrders />,
+            handle: { title: "admin.nav.orders" },
+          },
         ],
       },
       {
         element: <AuthLayout />,
         children: [
-          { path: "/login", element: <Login /> },
-          { path: "/register", element: <Register /> },
+          {
+            path: "/login",
+            element: <Login />,
+            handle: { title: "auth.login" },
+          },
+          {
+            path: "/register",
+            element: <Register />,
+            handle: { title: "auth.signUp" },
+          },
         ],
       },
     ],

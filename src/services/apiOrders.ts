@@ -69,9 +69,3 @@ export async function updateOrderStatus({
 
   return data;
 }
-
-export async function resetDemoData() {
-  const { error } = await supabase.rpc("reset_demo_data");
-
-  if (error) throw new Error(error.message);
-}

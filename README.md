@@ -38,16 +38,15 @@
 
 - **Menu**: browse dishes with images, descriptions and availability, filter by category, search instantly
 - **Cart**: add, remove and change quantities; saved across reloads and re-priced from the database before checkout
-- **Checkout**: validated form (Egyptian mobile numbers), cash or online payment, order summary. Login required
+- **Checkout**: validated form (Egyptian mobile numbers), cash on delivery (online payment marked as coming soon), order summary. Login required
 - **Live order tracking**: a progress tracker that updates in real time as the restaurant moves the order along, with shareable links like `/track-order?id=12`
 - **Accounts**: email and password sign-up and login with Supabase Auth
 
-### For the restaurant (`/admin`)
+### For the restaurant (`/admin`, admins only)
 
 - **Dashboard**: revenue, orders today, average order value, orders by status, 7-day activity and top dishes
 - **Orders**: live feed with status filters, order details and status updates
 - **Products**: create, edit, delete and toggle availability
-- **Demo reset**: admins can wipe orders and visitor-made products in one click
 
 Order workflow:
 
@@ -65,11 +64,11 @@ Pending → Preparing → Out For Delivery → Delivered
 
 ## 🔐 Highlights
 
-The admin dashboard is **open to everyone as a public demo**, so the database does the protecting, not the browser:
+The admin dashboard is **for admins only**. The browser hides it, and the database enforces it:
 
 - **Server-side pricing**: orders are created by the `place_order` Postgres function, which looks up prices itself and inserts the order and its items atomically. Totals can't be tampered with from the client.
-- **Row Level Security**: the seed menu can only be changed by admins. Visitors can freely play with products they add themselves.
-- **Controlled writes**: order status only changes through `update_order_status`. There are no direct insert or update grants on orders.
+- **Row Level Security**: only admins can change products. Customers only see their own orders; admins see all of them.
+- **Controlled writes**: order status only changes through the admin-only `update_order_status`. There are no direct insert or update grants on orders.
 - **Safe deletes**: deleting a product that appears in past orders archives it instead, so order history stays intact.
 - **Roles**: stored in a `profiles` table and checked by an `is_admin()` helper.
 
@@ -169,6 +168,7 @@ Run these in the Supabase SQL editor, in order. Each one is safe to re-run.
 1. [`20261002_demo_hardening.sql`](supabase/migrations/20261002_demo_hardening.sql): roles, categories, RLS policies, the `place_order` / `update_order_status` / `reset_demo_data` functions, Realtime on `orders`, and a demo menu if `products` is empty
 2. [`20261003_require_login_for_orders.sql`](supabase/migrations/20261003_require_login_for_orders.sql): only logged-in users can place orders
 3. [`20261003_archive_products.sql`](supabase/migrations/20261003_archive_products.sql): archive products that are in past orders instead of deleting them
+4. [`20261028_lock_admin.sql`](supabase/migrations/20261028_lock_admin.sql): the dashboard, product changes and order statuses are admin-only, and customers only see their own orders
 
 > The migrations extend existing `products`, `orders` and `order_items` tables. Create them first using the schema in [Database](#-database).
 

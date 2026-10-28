@@ -31,7 +31,6 @@ const ar: DeepStringRecord<typeof en> & {
     unavailable: "غير متاح",
     cancel: "إلغاء",
     all: "الكل",
-    demo: "تجريبي",
   },
 
   payment: {
@@ -109,7 +108,7 @@ const ar: DeepStringRecord<typeof en> & {
     tagline: "مشروع تجريبي متكامل لطلب الطعام مبني بـ React و Supabase.",
     explore: "استكشف",
     demoNote:
-      "هذا مشروع تجريبي لمعرض الأعمال. الطلبات ليست حقيقية وتظهر في لوحة التحكم العامة.",
+      "هذا مشروع تجريبي. الطلبات ليست حقيقية.",
     rights: "جميع الحقوق محفوظة.",
   },
 
@@ -168,7 +167,7 @@ const ar: DeepStringRecord<typeof en> & {
     placing: "جارٍ تأكيد الطلب...",
     backToMenu: "العودة للقائمة",
     demoNotice:
-      "تطبيق تجريبي: من فضلك لا تُدخل بيانات شخصية حقيقية. الطلبات تظهر في لوحة التحكم العامة.",
+      "تطبيق تجريبي: من فضلك لا تُدخل بيانات شخصية حقيقية.",
   },
 
   orderConfirmed: {
@@ -251,6 +250,7 @@ const ar: DeepStringRecord<typeof en> & {
   },
 
   notFound: {
+    title: "الصفحة غير موجودة",
     description: "الصفحة التي تبحث عنها غير موجودة.",
     backHome: "العودة للرئيسية",
   },
@@ -272,16 +272,7 @@ const ar: DeepStringRecord<typeof en> & {
       orders: "الطلبات",
     },
     backToSite: "العودة للموقع",
-    demoBanner:
-      "نسخة تجريبية عامة: أضف منتجات وحرّك الطلبات بين حالاتها بحرية. منتجات القائمة الأصلية محمية.",
     roleAdmin: "مسؤول",
-    roleVisitor: "زائر (المنتجات التجريبية للقراءة فقط)",
-    resetDemo: "إعادة ضبط البيانات",
-    resetTitle: "إعادة ضبط البيانات التجريبية؟",
-    resetDescription:
-      "سيتم حذف كل الطلبات وكل المنتجات التي أضافها الزوار. القائمة الأصلية ستبقى كما هي.",
-    resetConfirm: "إعادة الضبط",
-    resetDone: "تمت إعادة ضبط البيانات التجريبية.",
 
     stats: {
       revenue: "الإيرادات",
