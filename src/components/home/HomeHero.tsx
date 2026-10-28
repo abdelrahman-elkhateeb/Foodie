@@ -92,8 +92,8 @@ export default function HomeHero() {
             </p>
           </div>
           <span className="relative ms-2 flex size-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-            <span className="relative inline-flex size-2 rounded-full bg-green-500" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
+            <span className="relative inline-flex size-2 rounded-full bg-success" />
           </span>
         </div>
       </div>

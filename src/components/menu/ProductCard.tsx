@@ -4,6 +4,16 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { formatPrice } from "@/lib/format";
 import { useCartStore } from "@/store/cartStore";
 import type { Product } from "@/types/ProductsTypes";
@@ -21,6 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const description = isArabic
     ? product.description_ar
     : product.description_en;
+  const price = formatPrice(product.price, i18n.language);
 
   function handleAddToCart() {
     addToCart({
@@ -34,45 +45,92 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <Card className="group overflow-hidden pt-0">
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+    <Sheet>
+      <Card className="group overflow-hidden pt-0">
+        <SheetTrigger asChild>
+          <button
+            type="button"
+            className="flex flex-1 flex-col gap-(--card-spacing) text-start outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          >
+            <div className="relative aspect-square w-full overflow-hidden bg-muted">
+              <img
+                src={product.image_url}
+                alt={name}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              {product.category && (
+                <span className="absolute start-3 top-3 bg-background/90 px-2 py-1 text-[10px] font-semibold tracking-widest uppercase">
+                  {t(`categories.${product.category}`)}
+                </span>
+              )}
+            </div>
+
+            <CardContent className="space-y-2">
+              <h3 className="text-lg font-bold">{name}</h3>
+              <p className="line-clamp-2 text-sm text-muted-foreground">
+                {description}
+              </p>
+            </CardContent>
+          </button>
+        </SheetTrigger>
+
+        <CardFooter className="flex items-center justify-between gap-2">
+          <span className="text-lg font-black">{price}</span>
+
+          {product.is_available ? (
+            <Button
+              size="icon-lg"
+              onClick={handleAddToCart}
+              aria-label={t("menu.addToCart")}
+            >
+              <Plus className="size-5" />
+            </Button>
+          ) : (
+            <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+              {t("common.unavailable")}
+            </span>
+          )}
+        </CardFooter>
+      </Card>
+
+      <SheetContent
+        side="bottom"
+        className="mx-auto max-h-[90svh] w-full max-w-lg overflow-y-auto"
+      >
         <img
           src={product.image_url}
           alt={name}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="aspect-[4/3] w-full object-cover"
         />
-        {product.category && (
-          <span className="absolute start-3 top-3 bg-background/90 px-2 py-1 text-[10px] font-semibold tracking-widest uppercase">
-            {t(`categories.${product.category}`)}
-          </span>
-        )}
-      </div>
 
-      <CardContent className="flex-1 space-y-2">
-        <h3 className="text-lg font-bold">{name}</h3>
+        <SheetHeader className="p-6">
+          <SheetTitle className="text-2xl font-black tracking-tight normal-case">
+            {name}
+          </SheetTitle>
+          <SheetDescription>{description}</SheetDescription>
+        </SheetHeader>
 
-        <p className="line-clamp-2 text-sm text-muted-foreground">
-          {description}
-        </p>
-      </CardContent>
+        {/* Product options (sizes, extras) go here once the menu has them. */}
 
-      <CardFooter className="flex items-center justify-between gap-2">
-        <span className="text-lg font-black">
-          {formatPrice(product.price, i18n.language)}
-        </span>
-
-        <Button disabled={!product.is_available} onClick={handleAddToCart}>
-          {product.is_available ? (
-            <>
-              <Plus className="h-4 w-4" />
-              {t("menu.addToCart")}
-            </>
-          ) : (
-            t("common.unavailable")
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
+        <SheetFooter className="p-6 pt-0">
+          <SheetClose asChild>
+            <Button
+              size="lg"
+              className="h-14 w-full justify-between"
+              disabled={!product.is_available}
+              onClick={handleAddToCart}
+            >
+              <span>
+                {product.is_available
+                  ? t("menu.addToCart")
+                  : t("common.unavailable")}
+              </span>
+              <span className="text-sm font-black tabular-nums">{price}</span>
+            </Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 }

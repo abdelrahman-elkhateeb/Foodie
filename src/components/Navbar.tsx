@@ -1,4 +1,4 @@
-import { LogOut, Menu, ShoppingCart, User, UtensilsCrossed } from "lucide-react";
+import { LogOut, Menu, ShoppingCart, User } from "lucide-react";
 import { Link, NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import LanguageToggle from "@/components/LanguageToggle";
+import Logo from "@/components/Logo";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useUser } from "@/features/users/useUser";
 import { useLogout } from "@/features/users/useLogout";
@@ -82,15 +83,7 @@ export default function Navbar() {
             </SheetContent>
           </Sheet>
 
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-xl font-black tracking-tight"
-          >
-            <span className="flex size-8 items-center justify-center bg-primary text-primary-foreground">
-              <UtensilsCrossed className="size-4" />
-            </span>
-            {t("brand")}
-          </Link>
+          <Logo />
         </div>
 
         <nav className="hidden items-center gap-1 md:flex">{navLinks}</nav>

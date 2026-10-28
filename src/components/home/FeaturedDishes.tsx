@@ -46,7 +46,7 @@ export default function FeaturedDishes() {
             <Link
               key={category}
               to={`/menu?category=${category}`}
-              className="border px-4 py-2 text-xs font-semibold tracking-widest uppercase transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+              className="inline-flex items-center border px-4 py-2 pointer-coarse:min-h-11 text-xs font-semibold tracking-widest uppercase transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
             >
               {t(`categories.${category}`)}
             </Link>

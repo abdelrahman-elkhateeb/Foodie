@@ -23,7 +23,7 @@ export default function HowItWorks() {
         {steps.map(({ key, icon: Icon }, index) => (
           <li key={key} className="space-y-4 bg-background p-8">
             <div className="flex items-center justify-between">
-              <span className="text-5xl font-black text-primary tabular-nums">
+              <span className="text-5xl font-black text-primary-text tabular-nums">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <Icon className="size-6 text-muted-foreground" />

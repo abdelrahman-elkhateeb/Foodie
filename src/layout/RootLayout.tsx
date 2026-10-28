@@ -28,6 +28,8 @@ export default function RootLayout() {
       <ScrollRestoration />
       <Toaster
         richColors
+        // Clear the mobile cart bar.
+        mobileOffset={{ bottom: 88 }}
         position={i18n.language === "ar" ? "bottom-left" : "bottom-right"}
       />
     </TooltipProvider>

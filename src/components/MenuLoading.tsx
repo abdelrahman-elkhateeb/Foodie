@@ -8,7 +8,7 @@ export default function MenuLoading() {
           key={index}
           className="space-y-4 rounded-xl border p-4"
         >
-          <Skeleton className="h-48 w-full rounded-lg" />
+          <Skeleton className="aspect-square w-full rounded-lg" />
 
           <Skeleton className="h-6 w-3/4" />
 

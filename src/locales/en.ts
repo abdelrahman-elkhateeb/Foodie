@@ -112,6 +112,7 @@ const en = {
 
   cart: {
     title: "Your Cart",
+    view: "View cart",
     empty: "Your cart is empty",
     emptyDescription: "Add some delicious meals from the menu.",
     browseMenu: "Browse Menu",

@@ -5,7 +5,6 @@ import {
   Package,
   ShoppingBag,
   Home,
-  UtensilsCrossed,
 } from "lucide-react";
 
 import {
@@ -21,6 +20,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { LogoMark } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
@@ -50,9 +50,7 @@ export default function AdminSidebar() {
     <Sidebar side={i18n.dir() === "rtl" ? "right" : "left"}>
       <SidebarHeader>
         <div className="flex items-center gap-3 px-2 py-2">
-          <span className="flex size-9 items-center justify-center bg-primary text-primary-foreground">
-            <UtensilsCrossed className="size-4" />
-          </span>
+          <LogoMark className="size-9" />
           <div>
             <h2 className="font-bold">{t("admin.sidebarTitle")}</h2>
             <p className="text-xs text-muted-foreground">

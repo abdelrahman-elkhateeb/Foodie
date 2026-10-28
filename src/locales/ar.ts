@@ -123,6 +123,7 @@ const ar: DeepStringRecord<typeof en> & {
 
   cart: {
     title: "سلة الطلبات",
+    view: "عرض السلة",
     empty: "السلة فارغة",
     emptyDescription: "أضف بعض الوجبات اللذيذة من القائمة.",
     browseMenu: "تصفح القائمة",

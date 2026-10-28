@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { UtensilsCrossed } from "lucide-react";
+
+import Logo from "@/components/Logo";
 
 const links = [
   { to: "/menu", label: "nav.menu" },
@@ -16,15 +17,7 @@ export default function Footer() {
     <footer className="border-t bg-muted/40">
       <div className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-[2fr_1fr]">
         <div className="space-y-4">
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-xl font-black tracking-tight"
-          >
-            <span className="flex size-8 items-center justify-center bg-primary text-primary-foreground">
-              <UtensilsCrossed className="size-4" />
-            </span>
-            {t("brand")}
-          </Link>
+          <Logo />
 
           <p className="max-w-sm text-sm text-muted-foreground">
             {t("footer.tagline")}
