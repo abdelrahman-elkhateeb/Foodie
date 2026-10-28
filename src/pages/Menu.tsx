@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
@@ -20,6 +20,14 @@ export default function Menu() {
   const [search, setSearch] = useState("");
 
   const category = searchParams.get("category") ?? ALL;
+  const tabsRef = useRef<HTMLDivElement>(null);
+
+  // Keep the active tab visible in the swipeable row (e.g. ?category=drinks).
+  useEffect(() => {
+    tabsRef.current
+      ?.querySelector("[data-state=active]")
+      ?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [category, products.length]);
 
   // Only offer tabs for categories that actually have products.
   const categories = PRODUCT_CATEGORIES.filter((c) =>
@@ -71,7 +79,11 @@ export default function Menu() {
 
       {categories.length > 0 && (
         <Tabs value={category} onValueChange={handleCategoryChange}>
-          <TabsList className="h-auto max-w-full flex-wrap justify-start">
+          {/* One swipeable row on phones, wraps on wider screens. */}
+          <TabsList
+            ref={tabsRef}
+            className="max-w-full justify-start overflow-x-auto [scrollbar-width:none] md:flex-wrap [&::-webkit-scrollbar]:hidden"
+          >
             <TabsTrigger value={ALL}>{t("common.all")}</TabsTrigger>
             {categories.map((c) => (
               <TabsTrigger key={c} value={c}>

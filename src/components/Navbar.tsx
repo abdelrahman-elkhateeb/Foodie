@@ -62,7 +62,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-2 px-4">
         <div className="flex items-center gap-2">
           <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
             <SheetTrigger asChild>
@@ -77,8 +77,9 @@ export default function Navbar() {
                 <SheetTitle>{t("brand")}</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4">{navLinks}</nav>
-              <div className="px-4">
+              <div className="flex items-center gap-1 px-4">
                 <LanguageToggle />
+                <ThemeToggle />
               </div>
             </SheetContent>
           </Sheet>
@@ -89,11 +90,11 @@ export default function Navbar() {
         <nav className="hidden items-center gap-1 md:flex">{navLinks}</nav>
 
         <div className="flex items-center gap-1">
-          <div className="hidden md:block">
+          {/* On phones these live in the side menu to keep the bar from overflowing. */}
+          <div className="hidden items-center gap-1 md:flex">
             <LanguageToggle />
+            <ThemeToggle />
           </div>
-
-          <ThemeToggle />
 
           <Button variant="ghost" size="icon" asChild className="relative">
             <Link to="/cart">

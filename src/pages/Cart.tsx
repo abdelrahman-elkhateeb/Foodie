@@ -78,14 +78,14 @@ export default function Cart() {
                 size="sm"
                 className={cn(!item.isAvailable && "opacity-60")}
               >
-                <CardContent className="flex gap-4">
+                <CardContent className="flex gap-3 sm:gap-4">
                   <img
                     src={imageAt(item.image_url, 200)}
                     alt={name}
-                    className="h-24 w-24 object-cover"
+                    className="size-20 shrink-0 object-cover sm:size-24"
                   />
 
-                  <div className="flex flex-1 flex-col justify-between">
+                  <div className="flex min-w-0 flex-1 flex-col justify-between">
                     <div>
                       <h3 className="font-semibold">{name}</h3>
                       <p className="text-sm text-muted-foreground">
