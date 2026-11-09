@@ -46,15 +46,8 @@ const en = {
       badge: "Hot & fresh, delivered to your door",
       title: "Your favorite meals,",
       highlight: "one tap away",
-      subtitle:
-        "Browse the menu, order in seconds and watch your food move from our kitchen to your door in real time.",
       orderNow: "Order now",
       track: "Track an order",
-    },
-    featured: {
-      title: "Popular right now",
-      subtitle: "Hand-picked favorites our customers keep coming back for.",
-      viewAll: "View full menu",
     },
     how: {
       title: "How it works",
@@ -72,29 +65,9 @@ const en = {
         description: "Follow every step, from the kitchen to your door.",
       },
     },
-    why: {
-      title: "Why Foodie?",
-      fresh: {
-        title: "Made fresh",
-        description: "Every order is prepared the moment you place it.",
-      },
-      live: {
-        title: "Live tracking",
-        description: "Status updates appear instantly, no refreshing needed.",
-      },
-      payment: {
-        title: "Pay your way",
-        description: "Cash on delivery today, online payments coming soon.",
-      },
-      language: {
-        title: "Arabic & English",
-        description: "The whole experience in your language, RTL included.",
-      },
-    },
-    cta: {
-      title: "Hungry yet?",
-      subtitle: "Your next meal is a few clicks away.",
-      button: "Browse the menu",
+    tracking: {
+      title: "Live tracking",
+      description: "Status updates appear instantly, no refreshing needed.",
     },
   },
 

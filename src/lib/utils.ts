@@ -5,6 +5,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function scrollBehavior(): ScrollBehavior {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth"
+}
+
 // Asks Unsplash for a WebP/AVIF copy at the width it's shown at, instead of the
 // 800px original everywhere. Other image hosts are returned as they are.
 export function imageAt(url: string, width: number) {

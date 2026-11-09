@@ -131,9 +131,19 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild size="sm">
-              <Link to="/login">{t("nav.login")}</Link>
-            </Button>
+            <>
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="hidden sm:inline-flex"
+              >
+                <Link to="/register">{t("auth.signUp")}</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link to="/login">{t("nav.login")}</Link>
+              </Button>
+            </>
           )}
         </div>
       </div>

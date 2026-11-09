@@ -1,17 +1,15 @@
-import FeaturedDishes from "@/components/home/FeaturedDishes";
-import HomeCta from "@/components/home/HomeCta";
+import HomeCategories from "@/components/home/HomeCategories";
 import HomeHero from "@/components/home/HomeHero";
+import HomeTracking from "@/components/home/HomeTracking";
 import HowItWorks from "@/components/home/HowItWorks";
-import WhyUs from "@/components/home/WhyUs";
 
 export default function Home() {
   return (
     <>
       <HomeHero />
-      <FeaturedDishes />
+      <HomeCategories />
       <HowItWorks />
-      <WhyUs />
-      <HomeCta />
+      <HomeTracking />
     </>
   );
 }

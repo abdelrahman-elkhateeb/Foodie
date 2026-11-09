@@ -9,13 +9,8 @@ import ProductCard from "@/components/menu/ProductCard";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useProducts } from "@/features/products/useProducts";
+import { scrollBehavior } from "@/lib/utils";
 import { PRODUCT_CATEGORIES } from "@/types/ProductsTypes";
-
-function scrollBehavior(): ScrollBehavior {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ? "auto"
-    : "smooth";
-}
 
 export default function Menu() {
   const { t } = useTranslation();
