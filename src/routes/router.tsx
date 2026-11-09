@@ -1,4 +1,5 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import ProductDetails from "@/components/menu/ProductDetails";
 import AdminLayout from "@/layout/AdminLayout";
 import AuthLayout from "@/layout/AuthLayout";
 import ClientLayout from "@/layout/ClientLayout";
@@ -28,7 +29,18 @@ export const router = createBrowserRouter([
         element: <ClientLayout />,
         children: [
           { index: true, element: <Home /> },
-          { path: "menu", element: <Menu />, handle: { title: "menu.title" } },
+          {
+            path: "menu",
+            element: <Menu />,
+            handle: { title: "menu.title" },
+            children: [
+              {
+                path: ":productId",
+                element: <ProductDetails />,
+                handle: { title: "menu.title" },
+              },
+            ],
+          },
           {
             path: "checkout",
             handle: { title: "checkout.title" },

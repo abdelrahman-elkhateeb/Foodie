@@ -13,7 +13,7 @@ export default function NotFound() {
       <p className="text-muted-foreground">{t("notFound.description")}</p>
 
       <Button asChild>
-        <Link to="/">{t("notFound.backHome")}</Link>
+        <Link to="/menu">{t("notFound.backToMenu")}</Link>
       </Button>
     </div>
   );

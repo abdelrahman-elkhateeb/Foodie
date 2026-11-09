@@ -7,6 +7,7 @@ import QueryError from "@/components/QueryError";
 import ProductCard from "@/components/menu/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/features/products/useProducts";
+import { imageAt } from "@/lib/utils";
 import { PRODUCT_CATEGORIES } from "@/types/ProductsTypes";
 
 const FEATURED_COUNT = 6;
@@ -42,14 +43,28 @@ export default function FeaturedDishes() {
       </div>
 
       {categories.length > 0 && (
-        <div className="flex flex-wrap gap-2">
+        <div className="-mx-4 flex gap-3 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:auto-cols-fr lg:grid-flow-col lg:px-0 [&::-webkit-scrollbar]:hidden">
           {categories.map((category) => (
             <Link
               key={category}
               to={`/menu?category=${category}`}
-              className="inline-flex items-center border px-4 py-2 pointer-coarse:min-h-11 text-xs font-semibold tracking-widest uppercase transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+              className="group w-28 shrink-0 space-y-2 text-center outline-none focus-visible:ring-2 focus-visible:ring-ring/50 lg:w-auto"
             >
-              {t(`categories.${category}`)}
+              <div className="aspect-square overflow-hidden border bg-muted transition-colors group-hover:border-primary">
+                <img
+                  src={imageAt(
+                    products.find((p) => p.category === category)?.image_url ??
+                      "",
+                    300
+                  )}
+                  alt=""
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <span className="block text-xs font-semibold tracking-widest uppercase">
+                {t(`categories.${category}`)}
+              </span>
             </Link>
           ))}
         </div>

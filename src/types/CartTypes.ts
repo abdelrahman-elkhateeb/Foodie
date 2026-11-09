@@ -9,7 +9,7 @@ export type CartItem = {
 
 export type CartState = {
   cart: CartItem[];
-  addToCart: (product: Omit<CartItem, "quantity">) => void;
+  addToCart: (product: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeFromCart: (productId: number) => void;
   increaseQuantity: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;

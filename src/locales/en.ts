@@ -248,6 +248,7 @@ const en = {
     title: "Page not found",
     description: "The page you are looking for does not exist.",
     backHome: "Back Home",
+    backToMenu: "Back to menu",
   },
 
   errors: {

@@ -2,12 +2,15 @@ import type { CartState } from "@/types/CartTypes";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+// place_order rejects any line above this.
+export const MAX_ITEM_QUANTITY = 50;
+
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       cart: [],
 
-      addToCart: (product) => {
+      addToCart: (product, quantity = 1) => {
         const cart = get().cart;
         const existingItem = cart.find((item) => item.id === product.id);
 
@@ -15,7 +18,13 @@ export const useCartStore = create<CartState>()(
           set({
             cart: cart.map((item) =>
               item.id === product.id
-                ? { ...item, quantity: item.quantity + 1 }
+                ? {
+                    ...item,
+                    quantity: Math.min(
+                      item.quantity + quantity,
+                      MAX_ITEM_QUANTITY
+                    ),
+                  }
                 : item
             ),
           });
@@ -24,7 +33,7 @@ export const useCartStore = create<CartState>()(
         }
 
         set({
-          cart: [...cart, { ...product, quantity: 1 }],
+          cart: [...cart, { ...product, quantity }],
         });
       },
 

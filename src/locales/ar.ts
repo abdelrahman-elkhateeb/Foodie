@@ -262,6 +262,7 @@ const ar: DeepStringRecord<typeof en> & {
     title: "الصفحة غير موجودة",
     description: "الصفحة التي تبحث عنها غير موجودة.",
     backHome: "العودة للرئيسية",
+    backToMenu: "العودة للمنيو",
   },
 
   errors: {
